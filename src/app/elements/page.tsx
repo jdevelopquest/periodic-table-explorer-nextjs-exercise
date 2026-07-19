@@ -1,3 +1,7 @@
 export default function Elements() {
-  return <> </>;
+  return (
+    <>
+      <h1>Elements</h1>{" "}
+    </>
+  );
 }
