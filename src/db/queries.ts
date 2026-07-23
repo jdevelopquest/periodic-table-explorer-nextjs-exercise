@@ -14,3 +14,13 @@ export const getElementBySymbol = async (
 ): Promise<Element | undefined> => {
   return await db.query.periodicTable.findFirst({ where: { symbol: symbol } });
 };
+
+export const getSearchResults = async (
+  query: string,
+): Promise<Element[] | undefined> => {
+  return await db.query.periodicTable.findMany({
+    where: {
+      name: { like: `%${query}%` },
+    },
+  });
+};
