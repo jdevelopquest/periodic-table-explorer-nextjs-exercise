@@ -1,6 +1,12 @@
-import { getElementBySymbol } from "@/db/queries";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getElementBySymbol } from "@/db/queries";
 import { Element } from "@/lib/types";
+
+export const metadata: Metadata = {
+  title: "Element Details",
+  description: "Expose details about a specific element",
+};
 
 export default async function Page({
   params,
