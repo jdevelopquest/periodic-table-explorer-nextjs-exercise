@@ -4,6 +4,12 @@ An interactive periodic table web application built with **Next.js** and **Tailw
 
 ## Getting Started
 
+Copy `default.env` to `.env` and edit it:
+
+```bash
+DB_FILE_NAME=file:
+```
+
 Install dependencies:
 
 ```bash
