@@ -5,26 +5,17 @@ export default async function SearchPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { query = undefined } = await searchParams;
-
-  if (!query) return <div>Missing query parameter</div>;
-
-  const normalizedQuery = typeof query === "string" ? query : query.join(" ");
-
-  const results = await getSearchResults(normalizedQuery);
+  const { query, standardState, bondingType } = await searchParams;
+  const results = await getSearchResults(query, standardState, bondingType);
 
   return (
     <div>
-      <h2>Search Results for "{normalizedQuery}"</h2>
-      {results && results.length > 0 ? (
-        <ul>
-          {results.map((result) => (
-            <li key={result.atomicNumber}>{result.name}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No results found.</p>
-      )}
+      <h2>Search Results</h2>
+      <p>
+        {results && results.length > 0
+          ? results.map((result) => result.name).join(", ")
+          : "No results found."}
+      </p>
     </div>
   );
 }
