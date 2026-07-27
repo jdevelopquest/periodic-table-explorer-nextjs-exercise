@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getElementBySymbol } from "@/db/queries";
-import { Element } from "@/lib/types";
+import { getElementBySymbol } from "@/lib/db/get-element-by-symbol";
+import { Element } from "@/lib/types/element";
 
 export const metadata: Metadata = {
   title: "Element Details",
