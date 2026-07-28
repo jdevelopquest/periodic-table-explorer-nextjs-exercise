@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { getSearchResults } from "@/lib/db/get-search-results";
+
+export const metadata: Metadata = {
+  title: "Search",
+  description: "Search for elements in the periodic table",
+};
 
 export default async function SearchPage({
   searchParams,
