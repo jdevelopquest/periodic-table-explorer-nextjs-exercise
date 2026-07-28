@@ -1,10 +1,10 @@
-import Search from "./search";
+import SearchBar from "./search-bar";
 
 export default function Header() {
   return (
     <header>
       <h1>Periodic Table Explorer</h1>
-      <Search />
+      <SearchBar />
     </header>
   );
 }

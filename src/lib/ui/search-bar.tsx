@@ -3,7 +3,7 @@ import SearchButton from "./search-button";
 import ClearButton from "./clear-button";
 import SearchInput from "./search-input";
 
-export default function Search() {
+export default function SearchBar() {
   return (
     <Form action="/search" className="flex items-center gap-2 mx-auto my-4 px-4">
       <SearchButton />
