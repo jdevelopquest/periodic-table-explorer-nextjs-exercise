@@ -10,6 +10,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@libsql/client": "^0.17.4",
     "dotenv": "^17.4.2",
     "drizzle-orm": "1.0.0-rc.4",

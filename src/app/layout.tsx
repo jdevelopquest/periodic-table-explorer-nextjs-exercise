@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans, Noto_Sans_Symbols } from "next/font/google";
+import { Noto_Sans, Noto_Sans_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/lib/ui/header";
 
@@ -8,8 +8,8 @@ const notoSans = Noto_Sans({
   subsets: ["latin"],
 });
 
-const notoSymbols = Noto_Sans_Symbols({
-  variable: "--font-noto-symbols",
+const notoMono = Noto_Sans_Mono({
+  variable: "--font-noto-mono",
   subsets: ["latin"],
 });
 
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${notoSans.variable} ${notoSymbols.variable} h-full antialiased`}
+      className={`${notoSans.variable} ${notoMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Header />
