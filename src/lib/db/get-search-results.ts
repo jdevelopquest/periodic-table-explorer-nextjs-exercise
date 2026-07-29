@@ -1,11 +1,11 @@
 import { connection } from "@/db/connection";
 import { periodicTable } from "@/db/schema";
 import { or, like, sql } from "drizzle-orm";
-import { Element } from "@/lib/types/element";
+import { ElementResume } from "@/lib/types/element";
 
 export async function getSearchResults(
   q: string,
-): Promise<Element[] | undefined> {
+): Promise<ElementResume[] | undefined> {
   const prepared = connection
     .select()
     .from(periodicTable)
