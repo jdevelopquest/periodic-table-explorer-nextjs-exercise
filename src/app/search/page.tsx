@@ -39,7 +39,6 @@ export default async function SearchPage({
             <Link href={`/elements/${el.symbol}`} key={el.symbol!}>
               <ElementResumeCard
                 // utilisation de ! pour indiquer que les champs ne sont pas null
-                key={el.symbol!}
                 symbol={el.symbol!}
                 name={el.name!}
                 atomicNumber={el.atomicNumber!}
