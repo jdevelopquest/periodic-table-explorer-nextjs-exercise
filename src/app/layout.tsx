@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="en"
       className={`${notoSans.variable} ${notoMono.variable} h-full antialiased`}
     >
-      <body className="mx-auto min-h-full flex flex-col items-center container max-w-lg">
+      <body className="w-full mx-auto min-h-full container flex flex-col items-center">
         <Header />
         <main className="w-full mx-auto py-8 px-4">{children}</main>
       </body>

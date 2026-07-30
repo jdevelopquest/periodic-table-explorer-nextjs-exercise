@@ -1,25 +1,27 @@
+import Link from "next/link";
+
 export function ElementResumeCard({
-  key,
   symbol,
   name,
   atomicNumber,
 }: {
-  key: string;
   symbol: string;
   name: string;
   atomicNumber: number;
 }) {
   return (
-    <div
-      key={key}
-      className="flex flex-col items-center gap-2 w-full mx-auto p-3 border border-gray-200 rounded-xl"
-    >
-      <span className="text-3xl">{symbol}</span>
-      <h4 className="text-center text-2xl">{name}</h4>
-      <p className="w-full flex items-center">
-        <span className="text-gray-600 text-sm">Atomic Number:</span>
-        <span className="inline-block ml-auto text-right">{atomicNumber}</span>
-      </p>
-    </div>
+    <Link
+      href={`/elements/${symbol}`}
+      className="max-w-3xs flex flex-col items-center gap-2 mx-auto p-3 border border-gray-200 rounded-xl w-full">
+      <span className="inline-block w-full m-auto text-center text-2xl py-2 bg-gray-100 rounded-xl">
+        {atomicNumber}
+      </span>
+      <span className="inline-block w-full m-auto text-center text-3xl">
+        {symbol}
+      </span>
+      <span className="inline-block w-full m-auto text-center text-md text-gray-600">
+        {name}
+      </span>
+    </Link>
   );
 }
