@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Noto_Sans, Noto_Sans_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/lib/ui/header";
+import Loading from "@/lib/ui/loading";
 
 const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
@@ -30,7 +32,9 @@ export default function RootLayout({
     >
       <body className="w-full mx-auto min-h-full container flex flex-col items-center  cursor-default">
         <Header />
-        <main className="w-full mx-auto py-8 px-4">{children}</main>
+        <Suspense fallback={<Loading />}>
+          <main className="w-full mx-auto py-8 px-4">{children}</main>
+        </Suspense>
       </body>
     </html>
   );
