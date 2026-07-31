@@ -18,16 +18,16 @@ export function ElementCard({ element }: { element: Element }) {
         </span>
       </p>
       <p className="mx-auto flex-col gap-4 md:flex-row">
-        {[element.groupBlock, element.bondingType, element.standardState].map(
-          (value, i) => (
+        {[element.groupBlock, element.bondingType, element.standardState]
+          .filter((value) => value !== null)
+          .map((value, i) => (
             <span
               key={i}
               className={`block md:inline-block text-center text-sm text-gray-600 rounded-xl bg-gray-50 px-3 m-2 py-2 min-w-24`}
             >
               {value}
             </span>
-          ),
-        )}
+          ))}
       </p>
     </header>
   );
