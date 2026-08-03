@@ -1,4 +1,5 @@
 import { Element } from "@/lib/types/element";
+import { formatElementPropertiesWithUnits } from "@/lib/utils/format-element";
 
 export function ElementCard({ element }: { element: Element }) {
   const classifications = [
@@ -6,32 +7,12 @@ export function ElementCard({ element }: { element: Element }) {
     element.bondingType,
     element.standardState,
   ];
-  const basicProperties = {
-    tag: "basic properties",
-    properties: {
-      "Atomic mass": element.atomicMass,
-      "Standard state": element.standardState,
-      "Melting point": element.meltingPoint,
-      "Boiling point": element.boilingPoint,
-    },
-  };
-  const atomicProperties = {
-    tag: "atomic properties",
-    properties: {
-      Electronegativity: element.electronegativity,
-      "Atomic radius": element.atomicRadius,
-      "Van der Waals radius": element.vanDelWaalsRadius,
-      "Ionization energy": element.ionizationEnergy,
-      "Electron affinity": element.electronAffinity,
-      Density: element.density,
-    },
-  };
-  const allProperties = [basicProperties, atomicProperties];
+  const allProperties = formatElementPropertiesWithUnits(element);
   return (
     <>
       <header className="flex flex-col items-center gap-2 w-full mx-auto p-3 border border-gray-200 rounded-xl  bg-gray-100">
         <div className="flex flex-col items-center gap-2 w-full">
-          <span className="inline-block w-full m-auto text-center text-sm text-gray-600">
+          <span className="inline-block w-full m-auto text-center text-sm text-gray-600 mt-2">
             Atomic number
           </span>
           <span className="inline-block w-full m-auto text-center text-3xl">
@@ -70,8 +51,11 @@ export function ElementCard({ element }: { element: Element }) {
                     <h4 className="text-left text-sm text-gray-600 my-4">
                       {key}
                     </h4>
-                  ) : null}{" "}
-                  <p className="text-left text-sm font-bold">{value}</p>
+                  ) : null}
+                  {""}
+                  <p className="text-left text-sm font-bold">
+                    {value ? value : "-"}
+                  </p>
                 </li>
               ))}
             </ul>
