@@ -10,7 +10,7 @@ export function ElementCard({ element }: { element: Element }) {
   const allProperties = formatElementPropertiesWithUnits(element);
   return (
     <>
-      <header className="flex flex-col items-center gap-2 w-full mx-auto p-3 border border-gray-200 rounded-xl  bg-gray-100">
+      <header className="flex flex-col items-center gap-2 w-full mx-auto p-3 border border-gray-200 bg-gray-100 dark:border-amber-200 rounded-xl dark:bg-amber-100 dark:text-gray-900">
         <div className="flex flex-col items-center gap-2 w-full">
           <span className="inline-block w-full m-auto text-center text-sm text-gray-600 mt-2">
             Atomic number
@@ -31,7 +31,7 @@ export function ElementCard({ element }: { element: Element }) {
             .map((value, i) => (
               <span
                 key={i}
-                className={`block md:inline-block text-center text-sm text-gray-600 rounded-xl bg-gray-50 px-3 m-2 py-2 min-w-24`}
+                className={`block md:inline-block text-center text-sm text-gray-600 dark:text-gray-900 rounded-xl bg-gray-50 px-3 m-2 py-2 min-w-24`}
               >
                 {value}
               </span>
@@ -41,14 +41,14 @@ export function ElementCard({ element }: { element: Element }) {
       <section className="mx-auto flex flex-col gap-4 lg:flex-row">
         {allProperties.map((property, i) => (
           <article key={i} className="my-4 p-4 mx-auto w-full">
-            <h3 className="text-left text-lg font-bold text-gray-600 w-full mb-4">
+            <h3 className="text-left text-lg font-bold text-gray-600 dark:text-gray-300 w-full mb-4">
               {property.tag.toUpperCase()}
             </h3>
             <ul className="grid grid-cols-2 gap-4 w-full">
               {Object.entries(property.properties).map(([key, value]) => (
                 <li key={key} className="w-full">
                   {key ? (
-                    <h4 className="text-left text-sm text-gray-600 my-4">
+                    <h4 className="text-left text-sm text-gray-600 dark:text-gray-300 my-4">
                       {key}
                     </h4>
                   ) : null}
