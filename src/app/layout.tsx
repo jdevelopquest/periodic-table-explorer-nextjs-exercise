@@ -30,7 +30,7 @@ export default function RootLayout({
       lang="en"
       className={`${notoSans.variable} ${notoMono.variable} h-full antialiased`}
     >
-      <body className="w-full mx-auto min-h-full container flex flex-col items-center cursor-default">
+      <body className="w-full mx-auto min-h-full container flex flex-col items-center cursor-default dark:bg-gray-900 dark:text-white">
         <Header />
         <Suspense fallback={<Loading />}>
           <main className="w-full mx-auto py-8 px-4">{children}</main>
