@@ -23,7 +23,7 @@ export default async function Page({
   }
 
   return (
-    <section className="mx-auto">
+    <section className="mx-auto w-full">
       <ElementCard element={element} />
     </section>
   );

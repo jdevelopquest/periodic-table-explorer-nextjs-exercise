@@ -38,7 +38,7 @@ export function ElementCard({ element }: { element: Element }) {
             ))}
         </p>
       </header>
-      <section className="mx-auto flex flex-col gap-4 lg:flex-row">
+      <section className="mx-auto grid grid-cols-1 gap-4 lg:grid-cols-2">
         {allProperties.map((property, i) => (
           <article key={i} className="my-4 p-4 mx-auto w-full">
             <h3 className="text-left text-lg font-bold text-gray-600 dark:text-gray-300 w-full mb-4">
