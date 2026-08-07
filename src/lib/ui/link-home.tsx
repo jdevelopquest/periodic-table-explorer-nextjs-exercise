@@ -6,7 +6,6 @@ export default function LinkHome() {
     <Link
       href="/"
       aria-label="Link to Home page"
-      className="flex items-center gap-4"
     >
       <HomeIcon className="w-8 h-8" />
     </Link>

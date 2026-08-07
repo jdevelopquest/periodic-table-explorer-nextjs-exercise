@@ -1,8 +1,7 @@
-import React from "react";
+import Link from "next/link";
 import SearchBar from "./search-bar";
 import LinkHome from "./link-home";
-import LinkParams from "./link-params";
-import Link from "next/link";
+import ButtonTheme from "./button-theme";
 
 export default function Header() {
   return (
@@ -15,7 +14,7 @@ export default function Header() {
         </Link>
         <nav className="flex gap-4 self-end">
           <LinkHome />
-          <LinkParams />
+          <ButtonTheme />
         </nav>
       </div>
       <SearchBar />
