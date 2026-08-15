@@ -2,6 +2,7 @@ import Link from "next/link";
 import SearchBar from "./search-bar";
 import LinkHome from "./link-home";
 import ButtonTheme from "./button-theme";
+import LinkParams from "./link-params";
 
 export default function Header() {
   return (
@@ -12,10 +13,15 @@ export default function Header() {
             Periodic Table Explorer
           </h1>
         </Link>
-        <nav className="flex gap-4 self-end">
-          <LinkHome />
-          <ButtonTheme />
-        </nav>
+        <div className="flex gap-4">
+          <nav className="flex gap-4">
+            <LinkHome />
+            <LinkParams />
+          </nav>
+          <div className="flex gap-4 ml-auto">
+            <ButtonTheme />
+          </div>
+        </div>
       </div>
       <SearchBar />
     </header>
