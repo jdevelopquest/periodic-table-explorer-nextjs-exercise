@@ -1,74 +1,80 @@
 "use client";
+
 import {
   createContext,
-  useReducer,
   useEffect,
-  ReactNode,
-  useState,
+  useEffectEvent,
   useContext,
+  useReducer,
 } from "react";
-import { ThemeModeProvider, ThemeModeContext } from "./theme-mode-provider";
 
-export const ThemeContext = createContext<string>("no-preference");
-export const ThemeDispatchContext = createContext<
-  React.Dispatch<{ type: string; payload: string }>
->(() => {
-  return () => {};
-});
+type theme = { mode: "app" | "system"; value: "light" | "dark" | undefined };
 
-function themeReducer(
-  state: string,
-  action: { type: string; payload: string },
-) {
-  switch (action.type) {
-    case "SET_THEME":
-      return action.payload;
-    default:
-      return getSystemTheme();
-  }
+const ThemeContext = createContext<theme>({ mode: "system", value: undefined });
+const ThemeDispatchContext = createContext<
+  React.Dispatch<{ type: "set-theme"; payload: theme }>
+>(() => () => {});
+
+function reducer(
+  state: theme,
+  action: { type: "set-theme"; payload: theme },
+): theme {
+  return action.payload;
 }
 
-function getSystemTheme() {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
-
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const mode = useContext(ThemeModeContext);
-  const [theme, themeDispatch] = useReducer(themeReducer, getSystemTheme());
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    mq.addEventListener("change", () => {
-      if (mq.matches) {
-        themeDispatch({ type: "SET_THEME", payload: "dark" });
-      } else {
-        themeDispatch({ type: "SET_THEME", payload: "light" });
-      }
+export function useTheme(): [theme, () => void, () => void, () => void] {
+  const theme = useContext(ThemeContext);
+  const dispatch = useContext(ThemeDispatchContext);
+  const switchToLight = () =>
+    dispatch({ type: "set-theme", payload: { mode: "app", value: "light" } });
+  const switchToDark = () =>
+    dispatch({ type: "set-theme", payload: { mode: "app", value: "dark" } });
+  const switchToSystem = () =>
+    dispatch({
+      type: "set-theme",
+      payload: { mode: "system", value: undefined },
     });
-    return () => {
-      mq.removeEventListener("change", () => {
-        themeDispatch({ type: "SET_THEME", payload: getSystemTheme() });
-      });
-    };
-  }, [mode]);
+
+  return [theme, switchToLight, switchToDark, switchToSystem];
+}
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const getColorScheme = useEffectEvent(() => {
+    const md = window.matchMedia("(prefers-color-scheme: dark)");
+    return md.matches ? "dark" : "light";
+  });
+
+  const [theme, dispatch] = useReducer(reducer, {
+    mode: "system",
+    value: undefined,
+  });
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    return () => {
-      document.documentElement.classList.remove("dark");
-    };
+    // TODO: manage theme.value === undefined
+    const value = theme.mode === "system" ? getColorScheme() : theme.value!;
+    document.documentElement.classList.toggle("dark", value === "dark");
   }, [theme]);
 
+  const handleColorSchemeChange = useEffectEvent((e: MediaQueryListEvent) => {
+    if (theme.mode === "system") {
+      dispatch({
+        type: "set-theme",
+        payload: { mode: "system", value: undefined },
+      });
+    }
+  });
+
+  useEffect(() => {
+    const md = window.matchMedia("(prefers-color-scheme: dark)");
+    md.addEventListener("change", handleColorSchemeChange);
+    return () => {
+      md.removeEventListener("change", handleColorSchemeChange);
+    };
+  }, []);
+
   return (
-    <ThemeModeProvider>
-      <ThemeContext value={theme}>
-        <ThemeDispatchContext value={themeDispatch}>
-          {children}
-        </ThemeDispatchContext>
-      </ThemeContext>
-    </ThemeModeProvider>
+    <ThemeContext value={theme}>
+      <ThemeDispatchContext value={dispatch}>{children}</ThemeDispatchContext>
+    </ThemeContext>
   );
 }

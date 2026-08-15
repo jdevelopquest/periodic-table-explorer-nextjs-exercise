@@ -14,10 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ThemeProvider>
-      <html lang="en">
-        <Body>{children}</Body>
-      </html>
-    </ThemeProvider>
+    <html lang="en">
+      <Body>{children}</Body>
+    </html>
   );
 }
